@@ -1,6 +1,6 @@
 <p align="center">
 <img src="https://i.imgur.com/Mueltz2.png" alt="Live Cyberattack Map"/>
-<h1>SIEM (Azure Sentinel) Live Cyberattack Map</h1>
+<h1>SIEM (Azure Sentinel) Live Cyberattack Map (Work in Progress - Not Final)</h1>
 In this tutorial, we expose a virtual machine to the internet and use Azure Sentinel & Powershell to display live cyberattacks on a map. 
 <br>
 
