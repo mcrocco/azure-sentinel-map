@@ -30,7 +30,7 @@ In this tutorial, we expose a virtual machine to the internet and use Azure Sent
 - Set up Azure Sentinel
 - Utilize Geolocation API on Virtual Machine
 - Create a Custom Log
-- Create Live Cyberattack Map with Sentinel
+- Create a Live Cyberattack Map with Sentinel
 
 <h2>Actions and Observations</h2>
 
@@ -54,7 +54,7 @@ In this tutorial, we expose a virtual machine to the internet and use Azure Sent
 <p>We now need to set up Azure Sentinel, which is a SIEM that will allow us to take our logs from our virtual machine and display the geo-locations of the failed log in attempts on a map. Select Azure Sentinel in the Azure search bar, and add the workspace to the newly created Sentinel.</p>
 <img src="https://i.imgur.com/eXd9Nts.png" alt="Live Cyberattack Map"/>
 <h3>4. Utilize Geolocation API on Virtual Machine</h3>
-<p>We now need to remote desktop into our virtual machine. To do this, grab the public IP address of the honeypot and use this address in remote desktop to log in (Note: the first time you log in, use the incorrect username & password, then log in correctly. This will show up in the next step in our logs as a failed login attempt). Go to Event Viewer > Windows Logs > Security in the virtual machine, and filter the Event ID for 4625, as these will be the logs that display "Audit Failure", meaning a failed log in attempt to the virtual machine. Double-clicking on one of these events displays details such as the username used to log in, IP address of where they were trying to log in from, and date/time:</p>
+<p>We now need to remote desktop into our virtual machine. To do this, grab the public IP address of the honeypot and use this address on the remote desktop to log in (Note: the first time you log in, use the incorrect username & password, then log in correctly. This will show up in the next step in our logs as a failed login attempt). Go to Event Viewer > Windows Logs > Security in the virtual machine, and filter the Event ID for 4625, as these will be the logs that display "Audit Failure", meaning a failed log in attempt to the virtual machine. Double-clicking on one of these events displays details such as the username used to log in, the IP address of where they were trying to log in from, and date/time:</p>
 <img src="https://i.imgur.com/yRi5zgb.png" alt="Live Cyberattack Map"/>
 <p>In order to get more information out of the event logs, such as displaying location, latitude, longitude, etc., we are going to use a Geolocation API. On your virtual machine, go on Microsoft Edge and go to "ipgeolocation.io". You can take your failed log in attempt event and copy the IP address into the search bar to display the following information:</p>
 <img src="https://i.imgur.com/b55RYO6.png" alt="Live Cyberattack Map"/>
@@ -68,7 +68,7 @@ In this tutorial, we expose a virtual machine to the internet and use Azure Sent
 <p>This will allow the logs to get live location data such as latitude and longitude. After pasting the API key into the script, run the script, and go to C:\ProgramData\failed_rdp to see the output of the script (Note: the only real data is the last line, which is our first failed log in attempt. The rest are examples of extracted data):</p>
 <img src="https://i.imgur.com/pWoylt4.png" alt="Live Cyberattack Map"/>
 <h3>5. Create a Custom Log</h3>
-<p>After this, we are going to create a custom log in Azure by going to Home > Log Analytics workspaces > "workspace name" | Tables > Create a custom log. This will allow us to bring the custom geo-location data file from our Powershell script into Log Analytics workspace. In "Select a sample log", go back to the virtual machine to copy the contents of the failed_rdp file, paste it on our actual computer in Notepad, and save it as "failed_rdp.log". Below is what needs to be selected for the custom log:</p>
+<p>After this, we are going to create a custom log in Azure by going to Home > Log Analytics workspaces > "workspace name" | Tables > Create a custom log. This will allow us to bring the custom geo-location data file from our Powershell script into the Log Analytics workspace. In "Select a sample log", go back to the virtual machine to copy the contents of the failed_rdp file, paste it on our actual computer in Notepad, and save it as "failed_rdp.log". Below is what needs to be selected for the custom log:</p>
 <img src="https://i.imgur.com/Y5ATiUA.png" alt="Live Cyberattack Map"/>
 <img src="https://i.imgur.com/xifHIpw.png" alt="Live Cyberattack Map"/>
 <img src="https://i.imgur.com/X2DvGJf.png" alt="Live Cyberattack Map"/>
